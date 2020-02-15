@@ -3,7 +3,7 @@ package com.mayankkasera.weatherforecast.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class Forecast(
+data class ForecastReponce(
     @SerializedName("city")
     var city: City = City(),
     @SerializedName("cnt")

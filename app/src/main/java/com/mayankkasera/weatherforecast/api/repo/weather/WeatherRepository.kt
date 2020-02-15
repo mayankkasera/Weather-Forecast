@@ -1,6 +1,6 @@
 package com.mayankkasera.weatherforecast.api.repo.weather
 
-import com.mayankkasera.weatherforecast.pojo.Weather
+import com.mayankkasera.weatherforecast.pojo.WeatherResponse
 import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Callback
@@ -8,19 +8,19 @@ import retrofit2.Response
 
 class WeatherRepository(val weatherRequests: WeatherRequests) : WeatherRepositoryI {
 
-    override fun getWeatherDetails(city:String) : Observable<Weather>{
-        return Observable.create<Weather> { emitter ->
+    override fun getWeatherDetails(city:String) : Observable<WeatherResponse>{
+        return Observable.create<WeatherResponse> { emitter ->
             weatherRequests?.let {
-               it.getWeatherDetails(city).enqueue(object : Callback<Weather>{
-                   override fun onFailure(call: Call<Weather>, t: Throwable) {
+               it.getWeatherDetails(city).enqueue(object : Callback<WeatherResponse>{
+                   override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
                        emitter.onError(t)
                    }
-                   override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
+                   override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                        response.body()?.let {
                            emitter.onNext(it)
                            emitter.onComplete()
                        } ?: run {
-                           emitter.onNext(Weather())
+                           emitter.onNext(WeatherResponse())
                            emitter.onComplete()
                        }
                    }

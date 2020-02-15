@@ -2,6 +2,8 @@ package com.mayankkasera.weatherforecast.di.module
 
 import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.mayankkasera.weatherforecast.api.repo.weather.WeatherRepository
+import com.mayankkasera.weatherforecast.api.repo.weather.WeatherRequests
 import com.mayankkasera.weatherforecast.di.intercepter.AuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
@@ -32,5 +34,12 @@ class NetworkModule {
             .addInterceptor(AuthorizationInterceptor(context))
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideWeatherRequest(retrofit: Retrofit) : WeatherRequests {
+        return retrofit.create(WeatherRequests::class.java)
+    }
+
 
 }
