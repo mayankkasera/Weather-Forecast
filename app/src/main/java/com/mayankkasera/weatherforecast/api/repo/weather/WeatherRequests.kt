@@ -12,5 +12,4 @@ interface WeatherRequests {
     fun getWeatherDetails(
         @Query("q") city:String) : Call<Weather>
 
-
 }
