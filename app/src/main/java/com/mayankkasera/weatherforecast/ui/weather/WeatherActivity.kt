@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.mayankkasera.weatherforecast.R
 import com.mayankkasera.weatherforecast.ui.weather.city.CityFragment
+import com.mayankkasera.weatherforecast.ui.weather.weatherinfo.WeatherInfoFragment
 
 class WeatherActivity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ class WeatherActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_weather)
-        replace(CityFragment())
+        replace(WeatherInfoFragment())
     }
 
     fun replace(fragment: Fragment){

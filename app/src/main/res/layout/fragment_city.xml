@@ -20,24 +20,30 @@
         android:id="@+id/guideline_right"
         app:layout_constraintGuide_end="16dp"/>
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/androidx.appcompat.widget.AppCompatImageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg" />
+        android:src="@drawable/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_weather_forecast"
-        tools:layout_editor_absoluteX="-85dp"
-        tools:layout_editor_absoluteY="16dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/androidx.appcompat.widget.AppCompatImageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +53,7 @@
         app:layout_constraintVertical_bias="0.19999999"
         app:srcCompat="@drawable/app" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:fontFamily="@font/font"
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
@@ -58,9 +64,9 @@
         android:textSize="35sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/androidx.appcompat.widget.AppCompatImageView" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_city_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -74,7 +80,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:textColor="@color/colorAccent"
         android:id="@+id/enter_city_name"
         android:layout_width="0dp"
@@ -82,29 +88,26 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="200dp"
         android:backgroundTint="#FFFFFF"
-        android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/openWeatherForecast"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/openWeatherForecast"
         android:layout_width="46dp"
         android:layout_height="0dp"
-        android:contentDescription="@string/nullDiscription"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="#00FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        android:contentDescription="@string/nullDiscription"
         app:layout_constraintBottom_toBottomOf="@+id/enter_city_name"
-        app:srcCompat="@drawable/ic_arrow_forward"
-        app:layout_constraintStart_toEndOf="@+id/enter_city_name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.5"
-        />
+        app:layout_constraintStart_toEndOf="@+id/enter_city_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
+        app:srcCompat="@drawable/ic_arrow_forward" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
