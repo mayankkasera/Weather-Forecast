@@ -5,12 +5,14 @@ import com.mayankkasera.weatherforecast.api.RepositoryHelper
 import com.mayankkasera.weatherforecast.di.module.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
+import retrofit2.Retrofit
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [RepositoryModule::class])
 interface NetworkComponent {
+
 
     fun inject(repositoryHelper: RepositoryHelper)
 

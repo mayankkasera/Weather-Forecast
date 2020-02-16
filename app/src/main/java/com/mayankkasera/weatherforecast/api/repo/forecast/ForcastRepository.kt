@@ -1,5 +1,6 @@
 package com.mayankkasera.weatherforecast.api.repo.forecast
 
+import android.util.Log
 import com.mayankkasera.weatherforecast.pojo.ForecastReponce
 import com.mayankkasera.weatherforecast.pojo.WeatherResponse
 import com.mayankkasera.weatherforecast.ui.weather.weatherinfo.WeatherInfoData
@@ -16,8 +17,11 @@ class ForcastRepository(val forcastRequests : ForcastRequests): ForcastRepositor
                     .enqueue(object : Callback<ForecastReponce> {
                         override fun onFailure(call: Call<ForecastReponce>, t: Throwable) {
                             emitter.onError(t)
+                            Log.i("dsvchdsb",t.toString())
                         }
                         override fun onResponse(call: Call<ForecastReponce>, response: Response<ForecastReponce>) {
+                            Log.i("dsvchdsb",response.toString())
+                            Log.i("dsvchdsb",response.body().toString())
                             response.body()?.let {
                                 val weatherInfoData = WeatherInfoData()
                                 weatherInfoData.type = WeatherInfoData.Type.FORECAST

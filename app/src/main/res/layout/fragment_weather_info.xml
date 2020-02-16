@@ -1,316 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.weather.weatherinfo.WeatherInfoFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <data class="WeatherInfoDataBinding">
+
+        <import type="android.view.View"/>
+        <import type="com.mayankkasera.weatherforecast.utils.Helper"/>
+
+        <variable
+            name="state"
+            type="com.mayankkasera.weatherforecast.ui.weather.weatherinfo.WeatherInfoState" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg" />
+        tools:context=".ui.weather.weatherinfo.WeatherInfoFragment">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_weather_forecast" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_weather_forecast" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_city_name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/cityName"
-        android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/cityName" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_large_weather_icon"
-        android:layout_width="153dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/nullDiscription"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
-        app:srcCompat="@drawable/weather_icon" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="100dp"
+            android:text="@{state.weatherResponse.name}"
+            android:textColor="@color/colorAccent"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/cityName" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_main_temp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="@string/main_temp"
-        android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_large_weather_icon"
-        app:layout_constraintStart_toStartOf="@+id/iv_large_weather_icon"
-        app:layout_constraintTop_toBottomOf="@+id/iv_large_weather_icon"
-        tools:text="@string/main_temp" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_large_weather_icon"
+            android:layout_width="153dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/nullDiscription"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
+            app:setImageResource="@{state.weatherResponse.getIconUrl()}"
+            app:srcCompat="@drawable/weather_icon" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_min_temp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="end"
-        android:text="@string/main_temp"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_max_temp"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_main_temp"
-        tools:text="@string/main_temp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_main_temp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@{state.weatherResponse.getTemperature()}"
+            android:textColor="@color/colorAccent"
+            android:textSize="27sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_large_weather_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_large_weather_icon"
+            app:layout_constraintTop_toBottomOf="@+id/iv_large_weather_icon"
+            tools:text="@string/main_temp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_max_temp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:gravity="start"
-        android:text="@string/main_temp"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toEndOf="@+id/tv_min_temp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_main_temp"
-        tools:text="@string/main_temp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_weahter_discription"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/weather_discription"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_main_temp"
-        tools:text="@string/weather_discription" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_mid_line"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="24dp"
-        android:background="#BDB3B3"
-        app:layout_constraintEnd_toStartOf="@id/guideline_right"
-        app:layout_constraintStart_toEndOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weahter_discription" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_day1"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/temp_day"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_day2"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_min_max_temp1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/temp_min_max"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon1"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon1"
-        app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon1" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_small_weather_icon1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/nullDiscription"
-        app:layout_constraintEnd_toEndOf="@+id/tv_day1"
-        app:layout_constraintStart_toStartOf="@+id/tv_day1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day1"
-        app:srcCompat="@drawable/weather_icon" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_day2"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/temp_day"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_day3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_day1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_min_max_temp2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/temp_min_max"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon2"
-        app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon2"
-        app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon2" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_small_weather_icon2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/nullDiscription"
-        app:layout_constraintEnd_toEndOf="@+id/tv_day2"
-        app:layout_constraintStart_toStartOf="@+id/tv_day2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day2"
-        app:srcCompat="@drawable/weather_icon" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_day3"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/temp_day"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_day4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_day2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_min_max_temp3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/temp_min_max"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon3"
-        app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon3"
-        app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon3" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_small_weather_icon3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/nullDiscription"
-        app:layout_constraintEnd_toEndOf="@+id/tv_day3"
-        app:layout_constraintStart_toStartOf="@+id/tv_day3"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day3"
-        app:srcCompat="@drawable/weather_icon" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_day4"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/temp_day"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_day5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_day3"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_min_max_temp4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/temp_min_max"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon4"
-        app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon4"
-        app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon4" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_small_weather_icon4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/nullDiscription"
-        app:layout_constraintEnd_toEndOf="@+id/tv_day4"
-        app:layout_constraintStart_toStartOf="@+id/tv_day4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day4"
-        app:srcCompat="@drawable/weather_icon" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_day5"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/temp_day"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toEndOf="@+id/tv_day4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_min_max_temp5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/temp_min_max"
-        android:textColor="@color/colorAccent"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon5"
-        app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon5"
-        app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon5" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_small_weather_icon5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/nullDiscription"
-        app:layout_constraintEnd_toEndOf="@+id/tv_day5"
-        app:layout_constraintStart_toStartOf="@+id/tv_day5"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day5"
-        app:srcCompat="@drawable/weather_icon" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_min_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="end"
+            android:text="@{state.weatherResponse.getMinMaxTemperature()}"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_main_temp"
+            tools:text="@string/main_temp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_weahter_discription"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{state.weatherResponse.getDescription()}"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_main_temp"
+            tools:text="@string/weather_discription" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_mid_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:background="#BDB3B3"
+            app:layout_constraintEnd_toStartOf="@id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_weahter_discription" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_day1"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginTop="24dp"
+            android:text="@{state.forecastReponce.getDay(0)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_day2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_min_max_temp1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{state.forecastReponce.getMinMaxTemperature(0)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon1"
+            app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_small_weather_icon1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/nullDiscription"
+            app:layout_constraintEnd_toEndOf="@+id/tv_day1"
+            app:layout_constraintStart_toStartOf="@+id/tv_day1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_day1"
+            app:setImageResource="@{state.forecastReponce.getIconUrl(0)}"
+            app:srcCompat="@drawable/weather_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_day2"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginTop="24dp"
+            android:text="@{state.forecastReponce.getDay(8)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_day3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_day1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_min_max_temp2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{state.forecastReponce.getMinMaxTemperature(8)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon2"
+            app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon2"
+            app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon2" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_small_weather_icon2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/nullDiscription"
+            app:layout_constraintEnd_toEndOf="@+id/tv_day2"
+            app:layout_constraintStart_toStartOf="@+id/tv_day2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_day2"
+            app:setImageResource="@{state.forecastReponce.getIconUrl(8)}"
+            app:srcCompat="@drawable/weather_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_day3"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginTop="24dp"
+            android:text="@{state.forecastReponce.getDay(16)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_day4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_day2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_min_max_temp3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{state.forecastReponce.getMinMaxTemperature(16)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon3"
+            app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon3"
+            app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon3" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_small_weather_icon3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/nullDiscription"
+            app:layout_constraintEnd_toEndOf="@+id/tv_day3"
+            app:layout_constraintStart_toStartOf="@+id/tv_day3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_day3"
+            app:setImageResource="@{state.forecastReponce.getIconUrl(16)}"
+            app:srcCompat="@drawable/weather_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_day4"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginTop="24dp"
+            android:text="@{state.forecastReponce.getDay(24)}"
+
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_day5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_day3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_min_max_temp4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{state.forecastReponce.getMinMaxTemperature(24)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon4"
+            app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon4"
+            app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon4" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_small_weather_icon4"
+            android:layout_width="50dp"
+
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/nullDiscription"
+            app:layout_constraintEnd_toEndOf="@+id/tv_day4"
+            app:layout_constraintStart_toStartOf="@+id/tv_day4"
+            app:layout_constraintTop_toBottomOf="@+id/tv_day4"
+            app:setImageResource="@{state.forecastReponce.getIconUrl(24)}"
+            app:srcCompat="@drawable/weather_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_day5"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginTop="24dp"
+            android:text="@{state.forecastReponce.getDay(32)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_day4"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mid_line" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_min_max_temp5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{state.forecastReponce.getMinMaxTemperature(32)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_small_weather_icon5"
+            app:layout_constraintStart_toStartOf="@+id/iv_small_weather_icon5"
+            app:layout_constraintTop_toBottomOf="@+id/iv_small_weather_icon5" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_small_weather_icon5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/nullDiscription"
+            app:layout_constraintEnd_toEndOf="@+id/tv_day5"
+            app:layout_constraintStart_toStartOf="@+id/tv_day5"
+            app:layout_constraintTop_toBottomOf="@+id/tv_day5"
+            app:setImageResource="@{state.forecastReponce.getIconUrl(32)}"
+            app:srcCompat="@drawable/weather_icon" />
+
+        <androidx.constraintlayout.widget.Group
+            android:visibility="@{state.loading?View.GONE:(state.failure?View.GONE:View.VISIBLE)}"
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_city_name,iv_large_weather_icon,tv_min_temp,tv_weahter_discription,tv_mid_line,tv_day1,tv_day2,tv_day3,tv_day4,tv_day5,tv_min_max_temp1,tv_min_max_temp2,tv_min_max_temp3,tv_min_max_temp4,tv_min_max_temp5,iv_small_weather_icon1,iv_small_weather_icon2,iv_small_weather_icon3,iv_small_weather_icon4,iv_small_weather_icon5" />
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{state.loading?View.VISIBLE:View.GONE}"
+            app:indicatorName="BallSpinFadeLoaderIndicator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+
+            android:visibility="@{state.failure?View.VISIBLE:View.GONE}"
+            android:id="@+id/tvErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loader"
+            tools:text="@{state.message}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

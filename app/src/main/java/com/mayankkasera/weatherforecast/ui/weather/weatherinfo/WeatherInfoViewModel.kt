@@ -1,5 +1,6 @@
 package com.mayankkasera.weatherforecast.ui.weather.weatherinfo
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mayankkasera.weatherforecast.api.repo.forecast.ForcastRepositoryI
@@ -38,6 +39,7 @@ class WeatherInfoViewModel(val weatherRepositoryI: WeatherRepositoryI,
                       when(it.type){
                           WeatherInfoData.Type.WEATHER -> {
                               val weatherResponse = it.data as WeatherResponse
+                              Log.i("jfdsnkjd",weatherResponse.toString())
                               state = state.copy(weatherResponse = weatherResponse)
                           }
                           WeatherInfoData.Type.FORECAST -> {

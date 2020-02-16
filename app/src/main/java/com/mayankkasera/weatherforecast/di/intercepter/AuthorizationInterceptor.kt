@@ -17,7 +17,7 @@ class AuthorizationInterceptor(val context: Context) : Interceptor {
             throw NoConnectivityException()
         }
         val originalRequest = chain.request()
-        val newHttpUrl = originalRequest.url().newBuilder().addQueryParameter("api_key", BuildConfig.API_KEY).build()
+        val newHttpUrl = originalRequest.url().newBuilder().addQueryParameter("appid", BuildConfig.API_KEY).build()
         val newRequest = originalRequest.newBuilder().url(newHttpUrl).build()
         return chain.proceed(newRequest)
     }

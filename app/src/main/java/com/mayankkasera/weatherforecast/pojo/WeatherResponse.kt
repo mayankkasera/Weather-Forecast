@@ -2,6 +2,8 @@ package com.mayankkasera.weatherforecast.pojo
 
 
 import com.google.gson.annotations.SerializedName
+import com.mayankkasera.weatherforecast.utils.Helper
+import java.text.DecimalFormat
 
 data class WeatherResponse(
     @SerializedName("base")
@@ -80,12 +82,39 @@ data class WeatherResponse(
         var id: Int = 0,
         @SerializedName("main")
         var main: String = ""
-    )
+    ){
+
+    }
 
     data class Wind(
         @SerializedName("deg")
         var deg: Int = 0,
         @SerializedName("speed")
-        var speed: Int = 0
+        var speed: Double = 0.0
     )
+
+    fun getIconUrl() : String{
+        if(weather.size>0)
+           return String.format("http://openweathermap.org/img/wn/%s@2x.png",weather.get(0).icon )
+        else
+            return ""
+    }
+
+    fun getDescription():String{
+        if(weather.size>0)
+            return weather.get(0).description
+        else
+            return ""
+    }
+
+    fun getTemperature():String{
+        return Helper.getTemperatureInCelsius(main.temp)
+    }
+
+    fun getMinMaxTemperature():String{
+        return Helper.getTemperature(main.tempMin)+" / "+Helper.getTemperature(main.tempMax)+" "  +0x00B0.toChar() +"C"
+    }
+
+
+
 }

@@ -2,6 +2,7 @@ package com.mayankkasera.weatherforecast.pojo
 
 
 import com.google.gson.annotations.SerializedName
+import com.mayankkasera.weatherforecast.utils.Helper
 
 data class ForecastReponce(
     @SerializedName("city")
@@ -78,7 +79,7 @@ data class ForecastReponce(
             @SerializedName("temp")
             var temp: Double = 0.0,
             @SerializedName("temp_kf")
-            var tempKf: Int = 0,
+            var tempKf: Double = 0.0,
             @SerializedName("temp_max")
             var tempMax: Double = 0.0,
             @SerializedName("temp_min")
@@ -112,5 +113,33 @@ data class ForecastReponce(
             @SerializedName("speed")
             var speed: Double = 0.0
         )
+
+
+
     }
+
+    fun getMinMaxTemperature(day : Int):String{
+        if(list.size>day)
+          return Helper.getTemperature(list.get(day).main.tempMin)+"/"+Helper.getTemperature(list.get(day).main.tempMax) +"\n" +0x00B0.toChar() +"C"
+        else
+            return Helper.getTemperature(0.0)+"/"+Helper.getTemperature(0.0) +"\n" +0x00B0.toChar() +"C"
+
+    }
+
+    fun getIconUrl(day : Int) : String{
+        if(list.size>day)
+            return String.format("http://openweathermap.org/img/wn/%s@2x.png",list.get(day).weather.get(0).icon )
+        else
+            return ""
+    }
+
+    fun getDay(day : Int)  : String{
+        if(list.size>day)
+          return Helper.getDayFromDate(list.get(day).dtTxt)
+        else
+            return ""
+    }
+
+
+
 }

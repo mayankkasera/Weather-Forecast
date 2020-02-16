@@ -1,0 +1,21 @@
+package com.mayankkasera.weatherforecast.utils
+
+import android.view.View
+import androidx.constraintlayout.widget.Group
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+
+
+fun <T : ViewModel?> T.createFactory(): ViewModelProvider.Factory {
+
+    val viewModel = this
+
+    return object : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T = viewModel as T
+    }
+
+
+}
+
+
