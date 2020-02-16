@@ -324,7 +324,7 @@
             android:id="@+id/group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="tv_city_name,iv_large_weather_icon,tv_min_temp,tv_weahter_discription,tv_mid_line,tv_day1,tv_day2,tv_day3,tv_day4,tv_day5,tv_min_max_temp1,tv_min_max_temp2,tv_min_max_temp3,tv_min_max_temp4,tv_min_max_temp5,iv_small_weather_icon1,iv_small_weather_icon2,iv_small_weather_icon3,iv_small_weather_icon4,iv_small_weather_icon5" />
+            app:constraint_referenced_ids="tv_main_temp,tv_city_name,iv_large_weather_icon,tv_min_temp,tv_weahter_discription,tv_mid_line,tv_day1,tv_day2,tv_day3,tv_day4,tv_day5,tv_min_max_temp1,tv_min_max_temp2,tv_min_max_temp3,tv_min_max_temp4,tv_min_max_temp5,iv_small_weather_icon1,iv_small_weather_icon2,iv_small_weather_icon3,iv_small_weather_icon4,iv_small_weather_icon5" />
 
 
 
