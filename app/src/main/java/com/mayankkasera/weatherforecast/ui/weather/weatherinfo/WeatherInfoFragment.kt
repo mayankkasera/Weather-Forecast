@@ -12,7 +12,9 @@ import com.mayankkasera.weatherforecast.R
 /**
  * A simple [Fragment] subclass.
  */
+
 class WeatherInfoFragment : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
