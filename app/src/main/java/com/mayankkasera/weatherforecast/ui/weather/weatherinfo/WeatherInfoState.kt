@@ -11,4 +11,8 @@ data class WeatherInfoState(
     var message: String = "",
     var forecastReponce: ForecastReponce = ForecastReponce(),
     var weatherResponse: WeatherResponse = WeatherResponse()
-)
+){
+   companion object {
+       val LOADING_STATE = WeatherInfoState(loading=true)
+   }
+}

@@ -17,7 +17,9 @@ class WeatherInfoViewModel(val weatherRepositoryI: WeatherRepositoryI,
                            val forcastRepositoryI: ForcastRepositoryI) : ViewModel() {
 
     private var compositeDisposable = CompositeDisposable()
+
     var mutableLiveData: MutableLiveData<WeatherInfoState> = MutableLiveData()
+
     private var state = WeatherInfoState()
         set(value)  {
             field = value
@@ -39,7 +41,6 @@ class WeatherInfoViewModel(val weatherRepositoryI: WeatherRepositoryI,
                       when(it.type){
                           WeatherInfoData.Type.WEATHER -> {
                               val weatherResponse = it.data as WeatherResponse
-                              Log.i("jfdsnkjd",weatherResponse.toString())
                               state = state.copy(weatherResponse = weatherResponse)
                           }
                           WeatherInfoData.Type.FORECAST -> {
@@ -52,15 +53,13 @@ class WeatherInfoViewModel(val weatherRepositoryI: WeatherRepositoryI,
                     state = state.copy(
                         loading = false,
                         failure = true,
-                        message = it.localizedMessage
+                        message = it.localizedMessage?:"Something went wrong."
                     )
                 }, {
                     state = state.copy(
                         loading = false,
                         success = true
                     )
-                }, {
-
                 })
         )
     }
