@@ -82,15 +82,15 @@ class WeatherInfoViewModelTrest {
         weatherInfoViewModel?.loadData("bhopal")
 
         //Assert
+
+        //loading
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
-                loading = true,
-                success = false,
-                forecastReponce = ForecastReponce(cod = "test")
-                , weatherResponse = WeatherResponse(base = "test")
+                loading = true
             )
         )
 
+        //onNext
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
                 loading = true,
@@ -100,6 +100,17 @@ class WeatherInfoViewModelTrest {
             )
         )
 
+        //onNext
+        Mockito.verify(observer).onChanged(
+            WeatherInfoState(
+                loading = true,
+                success = false,
+                forecastReponce = ForecastReponce(cod = "test"),
+                weatherResponse = WeatherResponse(base = "test")
+            )
+        )
+
+        //onComplete
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
                 loading = false,
@@ -132,12 +143,14 @@ class WeatherInfoViewModelTrest {
         weatherInfoViewModel?.loadData("bhopal")
 
         //Assert
+        //loading
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
                 loading = true
             )
         )
 
+        //onError
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
                 loading = false,
@@ -169,12 +182,14 @@ class WeatherInfoViewModelTrest {
         weatherInfoViewModel?.loadData("bhopal")
 
         //Assert
+        //loading
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
                 loading = true
             )
         )
 
+        //onNext
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
                 loading = true,
@@ -183,6 +198,7 @@ class WeatherInfoViewModelTrest {
             )
         )
 
+        //onComplete
         Mockito.verify(observer).onChanged(
             WeatherInfoState(
                 loading = false,

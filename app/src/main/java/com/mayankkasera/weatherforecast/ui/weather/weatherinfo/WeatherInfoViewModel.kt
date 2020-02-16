@@ -26,6 +26,9 @@ class WeatherInfoViewModel(val weatherRepositoryI: WeatherRepositoryI,
             publishState(value)
         }
 
+     /*
+        Get data from api
+     */
     fun loadData(city : String){
         state = state.copy(loading = true)
 
