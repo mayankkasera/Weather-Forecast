@@ -7,6 +7,7 @@ import com.mayankkasera.weatherforecast.di.component.DaggerNetworkComponent
 import com.mayankkasera.weatherforecast.di.component.NetworkComponent
 import io.reactivex.plugins.RxJavaPlugins
 
+
 class App : Application() {
 
     companion object {
@@ -21,7 +22,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        RxJavaPlugins.setErrorHandler { throwable: Throwable? -> }
         Stetho.initializeWithDefaults(this)
         networkComponent = DaggerNetworkComponent.factory().create(NetworkConstants.baseUrl,this);
 

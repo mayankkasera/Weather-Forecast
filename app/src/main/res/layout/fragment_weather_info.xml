@@ -70,7 +70,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
             app:setImageResource="@{state.weatherResponse.getIconUrl()}"
-            app:srcCompat="@drawable/weather_icon" />
+             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_main_temp"
@@ -164,7 +164,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_day1"
             app:layout_constraintTop_toBottomOf="@+id/tv_day1"
             app:setImageResource="@{state.forecastReponce.getIconUrl(0)}"
-            app:srcCompat="@drawable/weather_icon" />
+             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_day2"
@@ -202,7 +202,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_day2"
             app:layout_constraintTop_toBottomOf="@+id/tv_day2"
             app:setImageResource="@{state.forecastReponce.getIconUrl(8)}"
-            app:srcCompat="@drawable/weather_icon" />
+             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_day3"
@@ -240,7 +240,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_day3"
             app:layout_constraintTop_toBottomOf="@+id/tv_day3"
             app:setImageResource="@{state.forecastReponce.getIconUrl(16)}"
-            app:srcCompat="@drawable/weather_icon" />
+             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_day4"
@@ -280,7 +280,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_day4"
             app:layout_constraintTop_toBottomOf="@+id/tv_day4"
             app:setImageResource="@{state.forecastReponce.getIconUrl(24)}"
-            app:srcCompat="@drawable/weather_icon" />
+             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_day5"
@@ -317,7 +317,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_day5"
             app:layout_constraintTop_toBottomOf="@+id/tv_day5"
             app:setImageResource="@{state.forecastReponce.getIconUrl(32)}"
-            app:srcCompat="@drawable/weather_icon" />
+             />
 
         <androidx.constraintlayout.widget.Group
             android:visibility="@{state.loading?View.GONE:(state.failure?View.GONE:View.VISIBLE)}"
@@ -325,6 +325,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="tv_city_name,iv_large_weather_icon,tv_min_temp,tv_weahter_discription,tv_mid_line,tv_day1,tv_day2,tv_day3,tv_day4,tv_day5,tv_min_max_temp1,tv_min_max_temp2,tv_min_max_temp3,tv_min_max_temp4,tv_min_max_temp5,iv_small_weather_icon1,iv_small_weather_icon2,iv_small_weather_icon3,iv_small_weather_icon4,iv_small_weather_icon5" />
+
+
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/loader"
@@ -339,18 +341,36 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-
             android:visibility="@{state.failure?View.VISIBLE:View.GONE}"
             android:id="@+id/tvErrorMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
             android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:fontFamily="@font/font"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loader"
             tools:text="@{state.message}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="16dp"
+            android:text="Retry"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:fontFamily="@font/font"
+            android:textColor="@color/colorAccent"
+            android:visibility="@{state.failure?View.VISIBLE:View.GONE}"
+            android:background="@drawable/retry_bacgroung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/retry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvErrorMessage"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

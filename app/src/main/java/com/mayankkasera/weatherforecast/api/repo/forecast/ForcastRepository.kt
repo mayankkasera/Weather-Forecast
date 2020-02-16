@@ -22,16 +22,26 @@ class ForcastRepository(val forcastRequests : ForcastRequests): ForcastRepositor
                         override fun onResponse(call: Call<ForecastReponce>, response: Response<ForecastReponce>) {
                             Log.i("dsvchdsb",response.toString())
                             Log.i("dsvchdsb",response.body().toString())
-                            response.body()?.let {
-                                val weatherInfoData = WeatherInfoData()
-                                weatherInfoData.type = WeatherInfoData.Type.FORECAST
-                                weatherInfoData.data = it
-                                emitter.onNext(weatherInfoData)
-                                emitter.onComplete()
-                            } ?: run {
-                                emitter.onNext(WeatherInfoData())
-                                emitter.onComplete()
+                            if(response.code()==200){
+                                response.body()?.let {
+                                    val weatherInfoData = WeatherInfoData()
+                                    weatherInfoData.type = WeatherInfoData.Type.FORECAST
+                                    weatherInfoData.data = it
+                                    emitter.onNext(weatherInfoData)
+                                    emitter.onComplete()
+                                } ?: run {
+                                    emitter.onNext(WeatherInfoData())
+                                    emitter.onComplete()
+                                }
+
                             }
+                            else if(response.code()==404){
+                                emitter.onError(Throwable("City not found."))
+                            }
+                            else{
+                                emitter.onError(Throwable("Error."))
+                            }
+
                         }
                     })
             }
