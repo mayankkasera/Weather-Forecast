@@ -100,6 +100,15 @@ class WeatherInfoViewModelTrest {
             )
         )
 
+        Mockito.verify(observer).onChanged(
+            WeatherInfoState(
+                loading = false,
+                success = true,
+                forecastReponce = ForecastReponce(cod = "test"),
+                weatherResponse = WeatherResponse(base = "test")
+            )
+        )
+
     }
 
     @Test
